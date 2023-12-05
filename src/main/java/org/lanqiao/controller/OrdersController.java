@@ -1,7 +1,9 @@
 package org.lanqiao.controller;
 
+import org.lanqiao.pojo.Orders;
 import org.lanqiao.service.OrdersService;
 import org.lanqiao.service.impl.OrdersServiceImpl;
+import org.lanqiao.util.PageUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 @WebServlet("/orders")
 public class OrdersController extends HttpServlet {
@@ -48,6 +51,11 @@ public class OrdersController extends HttpServlet {
         OrdersService ordersService = new OrdersServiceImpl();
         int count = ordersService.findAllCount(username);
 
+        //实例化分页工具类
+        PageUtil pageUtil = new PageUtil(currentPage,count,req);
+
+        //调用分页查询的方法
+        List<Orders> list = ordersService.findAll(username,pageUtil.getStartNum());
 
     }
 

@@ -15,4 +15,11 @@ public class OrdersServiceImpl implements OrdersService {
         OrdersDao ordersDao = new OrdersDaoImpl();
         return ordersDao.findAllCount(username);
     }
+
+    @Override
+    public List<Orders> findAll(String username, int startNum) {
+        OrdersDao ordersDao = new OrdersDaoImpl();
+
+        return ordersDao.findAll(username,startNum);
+    }
 }
